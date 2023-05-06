@@ -1,6 +1,11 @@
 const { app, BrowserWindow, Menu, MenuItem } = require('electron')
 const path = require('path')
 
+var showdown = require('showdown'), 
+converter = new showdown.Converter(),
+text      = '# hello, markdown!',
+html      = converter.makeHtml(text);
+
 const isMac = process.platform !== 'darwin'
 
 function createWindow() {
@@ -12,7 +17,8 @@ function createWindow() {
         }
     })
 
-    win.loadFile('./renderer/index.html')
+    console.log(html);
+    win.loadURL(`data:text/html;charset=utf-8,${html}`)
 }
 
 
