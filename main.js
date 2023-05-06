@@ -7,7 +7,7 @@ var showdown = require('showdown'),
     text = '# hello, markdown!',
     html = converter.makeHtml(text);
 
-const isMac = process.platform !== 'darwin'
+const isMac = process.platform === 'darwin'
 
 function createWindow() {
     const win = new BrowserWindow({
