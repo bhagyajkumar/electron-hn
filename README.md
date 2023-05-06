@@ -1,7 +1,7 @@
 ![Electron Notion](https://user-images.githubusercontent.com/64391274/235363274-375ce61c-721f-4543-a150-1b99525d54ac.png)
 
 
-# Project Name
+# Markdown Reader
 A simple app which can read markdown files
 The project uses a library called showdown.
 ## Team members
@@ -11,11 +11,12 @@ The project uses a library called showdown.
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
-1. Explaining the working of project
-2. Embed video of project demo
+1. Uses a js library to convert md into html and render it
 ## Libraries used
-Library Name - Version
+showdown - 2.10
 ## How to configure
-Instructions for setting up project
+1. clone the github repo
+2. download node
+3. run ```npm install```
 ## How to Run
-Instructions for running
+after configuring use `npm start` to run the project.
