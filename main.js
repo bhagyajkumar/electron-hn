@@ -12,7 +12,7 @@ function createWindow() {
         }
     })
 
-    win.loadFile('index.html')
+    win.loadFile('./renderer/index.html')
 }
 
 
