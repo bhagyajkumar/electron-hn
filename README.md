@@ -9,7 +9,7 @@ The project uses a library called showdown.
 2. Govind R Nair [https://github.com/Revertionist]
 3. Roger Antony S [https://github.com/widejoy]
 ## Link to product walkthrough
-![](https://raw.githubusercontent.com/bhagyajkumar/electron-hn/main/md_reader.mov)
+![video](https://raw.githubusercontent.com/bhagyajkumar/electron-hn/main/md_reader.mov)
 ## How it Works ?
 1. Uses a js library to convert md into html and render it
 ## Libraries used
