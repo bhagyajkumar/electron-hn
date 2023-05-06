@@ -9,8 +9,10 @@ var showdown = require('showdown'),
 
 const isMac = process.platform === 'darwin'
 
+var win
+
 function createWindow() {
-    const win = new BrowserWindow({
+    var win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -37,9 +39,9 @@ menu.append(
                 dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
                     .then((val) => {
                         var path = val.filePaths[0]
-                        console.log(path)
-                        fs.readFile(path, (err, data) => {
-                            console.log(data);
+                        fs.readFile(path, (err, data)=>{
+                            html = converter.makeHtml(data.toString())
+                            win.loadURL(`data:text/html;charset=utf-8,${html}`)
                         })
                     }
 
