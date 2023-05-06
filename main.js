@@ -1,10 +1,11 @@
-const { app, BrowserWindow, Menu, MenuItem } = require('electron')
+const { app, BrowserWindow, Menu, MenuItem, dialog } = require('electron')
 const path = require('path')
+const fs = require('fs')
 
-var showdown = require('showdown'), 
-converter = new showdown.Converter(),
-text      = '# hello, markdown!',
-html      = converter.makeHtml(text);
+var showdown = require('showdown'),
+    converter = new showdown.Converter(),
+    text = '# hello, markdown!',
+    html = converter.makeHtml(text);
 
 const isMac = process.platform !== 'darwin'
 
@@ -17,6 +18,8 @@ function createWindow() {
         }
     })
 
+
+
     console.log(html);
     win.loadURL(`data:text/html;charset=utf-8,${html}`)
 }
@@ -26,11 +29,22 @@ const menu = new Menu()
 
 menu.append(
     new MenuItem({
-        label: "Hello",
+        label: "File",
         submenu: [{
-            role: "help",
-            accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Alt+Shift+I',
-            click: () => { console.log('Sup') }
+            role: "open",
+            label: "open",
+            click: () => {
+                dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
+                    .then((val) => {
+                        var path = val.filePaths[0]
+                        console.log(path)
+                        fs.readFile(path, (err, data) => {
+                            console.log(data);
+                        })
+                    }
+
+                    )
+            }
         }
         ]
     })
@@ -47,6 +61,7 @@ app.whenReady().then(() => {
         }
     })
 })
+
 
 app.on('window-all-closed', () => {
     if (!isMac) {
