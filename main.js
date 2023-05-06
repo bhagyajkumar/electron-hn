@@ -23,7 +23,7 @@ function createWindow() {
 
 
     console.log(html);
-    win.loadURL(`data:text/html;charset=utf-8,${html}`)
+    win.loadFile(`./renderer/index.html`)
 }
 
 
