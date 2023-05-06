@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, MenuItem, dialog } = require('electron')
+const { app, BrowserWindow, Menu, MenuItem, dialog, getAllWindows } = require('electron')
 const path = require('path')
 const fs = require('fs')
 
@@ -12,7 +12,7 @@ const isMac = process.platform === 'darwin'
 var win
 
 function createWindow() {
-    var win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -42,7 +42,7 @@ menu.append(
                         fs.readFile(path, (err, data)=>{
                             html = converter.makeHtml(data.toString())
                             win.loadURL(`data:text/html;charset=utf-8,${html}`)
-                        })
+                        })  
                     }
 
                     )
