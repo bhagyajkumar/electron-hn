@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, MenuItem, dialog, getAllWindows } = require('electron')
+const { app, BrowserWindow, Menu, MenuItem, dialog, getAllWindows, ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 
@@ -20,7 +20,7 @@ function createWindow() {
         }
     })
 
-
+    win.webContents.openDevTools()
 
     console.log(html);
     win.loadFile(`./renderer/index.html`)
@@ -39,10 +39,7 @@ menu.append(
                 dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
                     .then((val) => {
                         var path = val.filePaths[0]
-                        fs.readFile(path, (err, data)=>{
-                            html = converter.makeHtml(data.toString())
-                            win.loadURL(`data:text/html;charset=utf-8,${html}`)
-                        })  
+                        loadMD(path);  
                     }
 
                     )
@@ -69,4 +66,15 @@ app.on('window-all-closed', () => {
     if (!isMac) {
         app.quit()
     }
+})
+
+function loadMD(path) {
+    fs.readFile(path, (err, data) => {
+        html = converter.makeHtml(data.toString());
+        win.loadURL(`data:text/html;charset=utf-8,${html}`);
+    });
+}
+
+ipcMain.on("md_string", (event, path)=>{
+    loadMD(path)
 })
